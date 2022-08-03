@@ -34,7 +34,7 @@ bool LSnake::move(int ticks)
     int newX = mHeadX;
     int newY = mHeadY;
 
-    if(ticks == 5)
+    if(ticks == 3)
     {
         switch (mDirection)
         {   
