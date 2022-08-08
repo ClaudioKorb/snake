@@ -1,12 +1,10 @@
 #ifndef SNAKE_H
 #define SNAKE_H
+
+#include "core.h"
 #include "textures.h"
 #include "apple.h"
 #include <vector>
-
-enum direction{
-    UP, RIGHT, DOWN, LEFT
-};
 
 class LSnakePiece{
     public:
@@ -31,7 +29,7 @@ class LSnake
 
         bool checkEat(LApple *apple);
         void eat();
-        bool checkCollision();
+        bool checkCollision(std::vector<position> barriers);
         bool inside(int x, int y);
         
         void setTexture(SDL_Renderer *gRenderer);

@@ -34,7 +34,7 @@ bool LSnake::move(int ticks)
     int newX = mHeadX;
     int newY = mHeadY;
 
-    if(ticks == 3)
+    if(ticks == 4)
     {
         switch (mDirection)
         {   
@@ -59,7 +59,12 @@ bool LSnake::move(int ticks)
         {
             mBody[i].move(mBody[i-1].getX(), mBody[i-1].getY());
         }
-
+        
+        if(newX >= GRID_WIDTH) newX = 0;
+        if(newX < 0) newX = GRID_WIDTH - 1;
+        if(newY >= GRID_HEIGHT) newY = 0;
+        if(newY < 0) newY = GRID_HEIGHT - 1;
+       
         mBody[0].move(newX, newY);
         mHeadX = mBody[0].getX();
         mHeadY = mBody[0].getY();
@@ -113,13 +118,13 @@ void LSnake::eat()
     mBody.push_back(newPiece);
 }
 
-bool LSnake::checkCollision()
+bool LSnake::checkCollision(std::vector<position> barriers)
 {
-    if(mHeadX == -1 || mHeadY == -1 || mHeadX == 20 || mHeadY == 15)
+    for(int i = 0; i < barriers.size(); i++)
     {
-        return true;
+        if(mHeadX == barriers[i].x && mHeadY == barriers[i].y) return true;
     }
-    
+
     if(mBody.size() < 3) return false;
     
     for(int i = 1; i < mBody.size(); i++)

@@ -1,6 +1,8 @@
-#include "textures.h"
 #ifndef APPLE_H
 #define APPLE_H
+#include "textures.h"
+#include "core.h"
+
 class LApple
 {
     public:
